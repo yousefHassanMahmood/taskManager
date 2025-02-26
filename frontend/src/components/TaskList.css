@@ -1,0 +1,100 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  .form-container {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 300px;
+  }
+  
+  .input,
+  .textarea,
+  .date-input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .textarea {
+    rows: 3;
+  }
+  
+  .input-error,
+  .textarea-error,
+  .date-error,
+  .employee-error {
+    color: red;
+    font-size: 12px;
+    
+  }
+  
+  .add-task-btn {
+    padding: 8px 12px;
+    border-radius: 5px;
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .status-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .status-column {
+    width: 300px;
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .status-header {
+    text-align: center;
+    background: #2c3e50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .task-item {
+    background: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+  }
+  
+  .task-title {
+    font-weight: bold;
+  }
+  
+  .task-description {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  
+  .select-status {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+  }
+  
