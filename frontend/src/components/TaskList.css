@@ -1,100 +1,290 @@
+@import "https://unpkg.com/open-props/easings.min.css";
+
+/* Variables */
+:root {
+  --background-light: #e9f6f8;
+  --text-light: #000;
+  --background-dark: #1a1a1a;
+  --text-dark: #fff;
+  --card-light: #f4f4f4;
+  --card-dark: #2c2c2c;
+  --icon-fill: #000;
+  --icon-fill-hover: #fff;
+}
+
+/* Theme Toggle Styles */
+.theme-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.theme-toggle:is(:hover, :focus-visible) > .sun-and-moon > :is(.moon, .sun) {
+  fill: var(--icon-fill-hover);
+}
+
+.theme-toggle:is(:hover, :focus-visible) .sun-and-moon > .sun-beams {
+  stroke: var(--icon-fill-hover);
+}
+
+/* Sun and Moon Styles */
+.sun-and-moon > :is(.moon, .sun, .sun-beams) {
+  transform-origin: center;
+}
+
+.sun-and-moon > :is(.moon, .sun) {
+  fill: var(--icon-fill);
+}
+
+.sun-and-moon > .sun-beams {
+  stroke: var(--icon-fill);
+  stroke-width: 2px;
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+[data-theme="dark"] .container {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+[data-theme="dark"] .status-column {
+  background: #3c3c3c;
+}
+
+[data-theme="dark"] .task-item {
+  background: #333;
+  color: var(--text-dark);
+}
+
+[data-theme="dark"] .status-header {
+  background: #444;
+}
+
+[data-theme="dark"] .add-task-btn {
+  background: #4caf50;
+}
+
+[data-theme="dark"] .delete-btn {
+  background: darkred;
+}
+
+/* Dark Mode - Sun and Moon Transitions */
+[data-theme="dark"] .sun-and-moon > .sun {
+  transform: scale(1.75);
+}
+
+[data-theme="dark"] .sun-and-moon > .sun-beams {
+  opacity: 0;
+}
+/* Dark Mode Adjustments for Moon Icon */
+[data-theme="dark"] .sun-and-moon > .moon {
+  fill: #fff; /* Set moon to white in dark mode */
+}
+
+[data-theme="dark"] .sun-and-moon > .sun {
+  fill: #fff; /* Set sun to white in dark mode */
+}
+
+/* Make sun beams visible in dark mode */
+[data-theme="dark"] .sun-and-moon .sun-beams {
+  stroke: #fff; /* Set sun beams to white in dark mode */
+}
+
+
+[data-theme="dark"] .sun-and-moon > .moon > circle {
+  transform: translateX(-7px);
+}
+
+@supports (cx: 1) {
+  [data-theme="dark"] .sun-and-moon > .moon > circle {
+    cx: 17;
+    transform: translateX(0);
+  }
+}
+
+/* Transition Styles for Sun and Moon */
+@media (prefers-reduced-motion: no-preference) {
+  .sun-and-moon > .sun {
+    transition: transform .5s var(--ease-elastic-3);
+  }
+
+  .sun-and-moon > .sun-beams {
+    transition: transform .5s var(--ease-elastic-4), opacity .5s var(--ease-3);
+  }
+
+  .sun-and-moon .moon > circle {
+    transition: transform .25s var(--ease-out-5);
+  }
+
+  @supports (cx: 1) {
+    .sun-and-moon .moon > circle {
+      transition: cx .25s var(--ease-out-5);
+    }
+  }
+
+  [data-theme="dark"] .sun-and-moon > .sun {
+    transition-timing-function: var(--ease-3);
+    transition-duration: .25s;
+    transform: scale(1.75);
+  }
+
+  [data-theme="dark"] .sun-and-moon > .sun-beams {
+    transition-duration: .15s;
+    transform: rotateZ(-25deg);
+  }
+
+  [data-theme="dark"] .sun-and-moon > .moon > circle {
+    transition-duration: .5s;
+    transition-delay: .25s;
+  }
+}
+
+/* Container Styles */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-  }
-  
-  .form-container {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 300px;
-  }
-  
-  .input,
-  .textarea,
-  .date-input {
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .textarea {
-    rows: 3;
-  }
-  
-  .input-error,
-  .textarea-error,
-  .date-error,
-  .employee-error {
-    color: red;
-    font-size: 12px;
-    
-  }
-  
-  .add-task-btn {
-    padding: 8px 12px;
-    border-radius: 5px;
-    background: #4caf50;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .status-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    gap: 20px;
-  }
-  
-  .status-column {
-    width: 300px;
-    background: #f4f4f4;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .status-header {
-    text-align: center;
-    background: #2c3e50;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .task-item {
-    background: #fff;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-  }
-  
-  .task-title {
-    font-weight: bold;
-  }
-  
-  .task-description {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .delete-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 5px;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-top: 5px;
-  }
-  
-  .select-status {
-    width: 100%;
-    padding: 5px;
-    margin-top: 5px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--background-light);
+  width: 100%;
+}
+
+/* Form Styles */
+.form-container {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.input,
+.textarea,
+.date-input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+
+.input-error,
+.textarea-error,
+.date-error,
+.employee-error {
+  color: red;
+  font-size: 12px;
+}
+
+/* Button Styles */
+.add-task-btn {
+  padding: 8px 12px;
+  border-radius: 5px;
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* Status Container Styles */
+.status-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.status-column {
+  width: 350px;
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.status-header {
+  text-align: center;
+  background: #2c3e50;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Task Item Styles */
+.task-item {
+  background: #fff;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.task-title {
+  font-weight: bold;
+}
+
+.task-description {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Delete Button Styles */
+.delete-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+/* Select Status Styles */
+.select-status {
+  width: 100%;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+/* File Input Styles */
+.file-input {
+  display: none;
+}
+
+.file-upload-label {
+  display: inline-flex;
+  align-items: center;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.file-input svg {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.file-link svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+/* Dark Mode Paragraph Text */
+[data-theme="dark"] p {
+  color: white;
+}
